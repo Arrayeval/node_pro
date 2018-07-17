@@ -4,7 +4,7 @@ var data = ''
 const Tabs = {
   getTabs () {
     var sql = `select * from list`
-    return dbOperate.queryData(sql,con).then(function(res){
+    return dbOperate.queryData(sql,'').then(function(res){
       return Promise.resolve(res)
     }).catch(err => {
       return Promise.reject(err)
@@ -18,6 +18,6 @@ const Tabs = {
     }).catch(err => {
       return Promise.reject(err)
     })
-  }
+  },
 }
 module.exports = Tabs;
