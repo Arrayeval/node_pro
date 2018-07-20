@@ -10,3 +10,6 @@
 5) mysql -uroot -p123456
 
 E:\Program Files (x86)\mysql-5.7.17-winx64\bin
+
+
+heidis导出sql https://blog.csdn.net/aoxiangzhe/article/details/40589987
