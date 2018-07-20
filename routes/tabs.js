@@ -9,7 +9,7 @@ router.route('/')
     })
    // res.send('respond with a resource');
   })
-// 
+
 router.route('/addTabs') 
   .post((req,res) => {
     Tab.addTabs(req.body).then(result => {
