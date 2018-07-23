@@ -23,12 +23,11 @@ router.route('/getArticleList').get((req,res)=>{
 })
 
 // deleteArticle
-router.route('/deleteArticle:id?').get((req,res) => {
-  // console.log(req.params);
-  console.log(req.query);
-  // console.log(req.body);
-  res.json({code: 0, msg: ''})
+router.route('/deleteArticle').get((req,res) => {
+  Article.deleteArticle({id: req.query.id}).then(result => {
+    res.json({code: 0, msg: '',result: result})
+  }).catch(err => {
+    res.json(err)
+  })
 })
-
-
 module.exports =  router;
