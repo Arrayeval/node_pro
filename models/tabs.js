@@ -13,6 +13,11 @@ const Tabs = {
   // add(edit) tabs 
   addTabs (data) {
     var sql = `insert into list set ?`
+    // 文件处理
+    if (data.fileData && data.fileData.length > 0) {
+      data.logo_info = JSON.stringify(data.fileData[0])
+      delete data.fileData
+    }
     if (data.id != undefined) {
       sql = `update list set item_id =? , lag_title= ?, short_des = ?, time_date = ?, author_name = ? where id = ${data.id}`
       delete data.id

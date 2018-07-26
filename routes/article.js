@@ -6,9 +6,9 @@ var Article = require('../models/article')
 router.route("/addArticle")
   .post((req,res)=>{
     Article.addArticle(req.body).then(result=>{
-      res.json({code: 0, msg: ''})
+      return res.json({code: 0, msg: ''})
     }).catch(err=>{
-      res.json(err)
+      return res.json(err)
     })
   })
  
@@ -16,18 +16,18 @@ router.route("/addArticle")
 router.route('/getArticleList').get((req,res)=>{
   var params = url.parse(req.url,true).query
   Article.getArticleList({...params}).then(result => {
-    res.json({code: 0, msg: '',data:result})
+    return res.json({code: 0, msg: '',data:result})
   }).catch(err=>{
-    res.json(err)
+    return res.json(err)
   });
 })
 
 // deleteArticle
 router.route('/deleteArticle').get((req,res) => {
   Article.deleteArticle({id: req.query.id}).then(result => {
-    res.json({code: 0, msg: '',result: result})
+    return res.json({code: 0, msg: '',result: result})
   }).catch(err => {
-    res.json(err)
+    return res.json(err)
   })
 })
 module.exports =  router;

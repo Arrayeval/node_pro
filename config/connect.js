@@ -1,6 +1,5 @@
 var mysql = require('mysql')
 var config = require('./baseConfig')
-console.log(config);
 var connection = ''
 var dbOperate = {
   connectDB() {
@@ -12,7 +11,6 @@ var dbOperate = {
       database: config.localConnect.database
     })
     connection.connect();
-    console.log("connection__",connection);
     return connection;
   },
   queryData (sql,params) {
@@ -20,7 +18,7 @@ var dbOperate = {
     return new Promise((resolve, reject) => {
       connection.query(sql,params,function(err,results){
         if (err) {
-          console.log("err", err)
+          console.log("err",err)
           return reject(err)
         }
         return resolve(results)
