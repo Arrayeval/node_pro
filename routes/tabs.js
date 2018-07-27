@@ -11,7 +11,7 @@ router.all('*', function(req, res, next) {
   next();
 });
 
-// getTabs
+// getTabslist
 router.route('/')
   .get((req,res) => {
     Tab.getTabs().then(result => {
@@ -20,6 +20,7 @@ router.route('/')
    // res.send('respond with a resource');
   })
 
+// addTabs
 router.route('/addTabs') 
   .post((req,res) => {
     Tab.addTabs(req.body).then(result => {
@@ -30,4 +31,11 @@ router.route('/addTabs')
    // res.send('respond with a resource');
   })
 
+// getTaInfo获取模块信息
+router.route('/getTabInfo:tabID')
+  .get((req,res) => {
+    Tab.getTabInfo({tabID:req.params.tabID}).then(res => {
+      return res.json(res)
+    })
+  })
 module.exports = router;

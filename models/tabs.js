@@ -2,6 +2,7 @@ var dbOperate = require('../config/connect')
 var con = ''
 var data = ''
 const Tabs = {
+  // 获得tabsList
   getTabs () {
     var sql = `select * from list`
     return dbOperate.queryData(sql,'').then(function(res){
@@ -29,5 +30,12 @@ const Tabs = {
       return Promise.reject(err)
     })
   },
+  // getTabInfo
+  getTabInfo (data) {
+    console.log(data);
+    if (data.tabID != undefined) {
+
+    }
+  }
 }
 module.exports = Tabs;
