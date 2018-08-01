@@ -19,7 +19,7 @@ const Article = {
   addArticle (data) {
     var sql = `insert into article_list set ?`
     if (data.id != undefined ) { // 修改[拥有id说明是修改]
-      sql = `update article_list set title =? , content= ?, type = ?, author = ?, createTime = ? where id = ${data.id}`
+      sql = `update article_list set title = ? , content= ?, type = ?, author = ?, createTime = ?, logo_info = ? where id = ${data.id}`
       delete data.id
       data = Object.values(data)
     }  

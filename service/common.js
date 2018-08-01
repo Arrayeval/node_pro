@@ -34,3 +34,38 @@ exports.getFile =  function (url,filePath) {
   
   })
 }
+
+// 获取图片资源
+exports.getImgFile = function (res,imgName,filePath) {
+  // var parse = require('url').parse;
+  var join = require("path").join
+  var fs = require('fs')
+  var http = require("http")
+  // 路径解析
+  var path = require('path')
+  var _path = path.resolve(__dirname, '..')
+  var root = _path + '/upload/img/'
+  var imgPath = join(root,"imgName")
+  //var server = http.createServer((req,res)=>{
+      fs.stat(path,(err,stat)=>{
+        console.log(path)
+        if(err){
+          if("ENOCNT" === err.code) {
+            res.statusCode = 404;
+            res.end("Not Found")
+          } else {
+            res.statusCode = 500;
+            res.end("Internal Server Error")
+          }
+        } else {
+          res.setHeader("Content-Length",stat.size);
+          var stream = fs.createReadStream(imgPath);
+          stream.pipe(res);
+          stream.on("error",function(err){
+            res.statusCode = 500;
+            res.end("Internal Server Error")
+          })
+        }
+      })
+  //}).listen(5000)
+} 

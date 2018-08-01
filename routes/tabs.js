@@ -32,10 +32,11 @@ router.route('/addTabs')
   })
 
 // getTaInfo获取模块信息
-router.route('/getTabInfo:tabID')
+router.route('/getTabInfo')
   .get((req,res) => {
-    Tab.getTabInfo({tabID:req.params.tabID}).then(res => {
-      return res.json(res)
-    })
+    Tab.getTabInfo({tabID:req.query.tabID}).then(result => {
+      return res.json({code:0 ,msg: '', data: result})
+    }).catch(err => res.json(err))
   })
+
 module.exports = router;
