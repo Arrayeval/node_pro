@@ -17,14 +17,24 @@ router.all('*', function(req, res, next) {
 // 上传图片
 router.route('/uploadImg').post((req,res)=>{
   // parse a file upload
+  var fs = require('fs')
   var form = new formidable.IncomingForm();
-  form.uploadDir = "./upload/img";                  // 文件存储地址
-  form.keepExtensions = true;                       // 保留文件后缀
-  form.maxFieldSize = 2;                            // 设置图片大小
-  form.parse(req, function(err, fields, files) {    // 解析文件[files：文件信息]
-   // console.log("files",files);
-    res.writeHead(200, {'content-type': 'text/plain'});
-    return  res.end(util.inspect({fields: fields, files: files}));
+  form.encoding = 'utf-8';                    
+  form.uploadDir = "./public/images";                     // 文件存储地址
+  form.keepExtensions = true;                         // 保留文件后缀
+  form.maxFieldSize = 2*1024*1024;                      // 设置图片大小
+  form.parse(req, function(err, fields, files) {      // 解析文件[files：文件信息]
+    var newfilename =form.uploadDir + "/" + files.file.name; // 最终文件名 
+    var oldFilename =files.file.path; 
+    res.writeHead(200, {'content-type': 'text/plain'});  
+    fs.rename(oldFilename,newfilename,function(err){
+      if(err){
+        console.error("改名失败"+err);
+      }
+     return  res.end(util.inspect({fields: fields, files: files}));
+    });
+    //return  res.end(util.inspect({fields: fields, files: files}));
+    return '';
   });
   return;
 })
