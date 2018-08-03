@@ -2,6 +2,7 @@ var express = require('express')
 var url = require('url')
 var router = express.Router()
 var Article = require('../models/article')
+
 // addArticle [updateArticle]
 router.route("/addArticle")
   .post((req,res)=>{

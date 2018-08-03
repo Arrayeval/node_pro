@@ -8,8 +8,10 @@ const Tabs = {
     var sql = `select * from list`
     return dbOperate.queryData(sql,'').then(function(res){
       res.forEach((item , key) => {
-        item.file_data = JSON.parse(item.file_data)
-        item.file_data.url = envConfig.address + '/images/' + item.file_data['name']
+        if (item.file_data !== '') {
+          item.file_data = JSON.parse(item.file_data)
+          item.file_data.url = envConfig.address + '/images/' + item.file_data['name']
+        }
       });
       return Promise.resolve(res)
     }).catch(err => {
@@ -24,6 +26,8 @@ const Tabs = {
     if (data.file_data && data.file_data.length > 0) {
       data.file_data = JSON.stringify(data.file_data[0])
       // delete data.file_data
+    } else {
+      data.file_data = ''
     }
     if (data.item_id != undefined) {
       sql = `update list set  lag_title= ?, short_des = ?, author_name = ?, time_date = ? ,file_data = ? where item_id = ${data.item_id}`
@@ -44,8 +48,10 @@ const Tabs = {
       var sql = `select * from list where item_id = ${data.tabID}`;
       return dbOperate.queryData(sql,'').then(function(res){
         res.forEach((item , key) => {
-          item.file_data = JSON.parse(item.file_data)
-          item.file_data.url = envConfig.address +'/images/' + item.file_data['name']
+          if (item.file_data !== '') {
+            item.file_data = JSON.parse(item.file_data)
+            item.file_data.url = envConfig.address +'/images/' + item.file_data['name']
+          }
         });
         return Promise.resolve(res);
       }).catch(err => {return  Promise.reject(err)})

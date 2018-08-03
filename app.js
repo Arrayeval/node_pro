@@ -17,8 +17,8 @@ var app = express();
 var cors  = require('cors')
 var corsConfig = require('./config/corsConfig')
 app.options('*',cors(corsConfig))
-
-app.locals.dataDocuemnt = 'www'
+app.all('*', cors(corsConfig));
+// app.locals.dataDocuemnt = 'www'
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
 // app.set('view engine', 'jade');
@@ -52,6 +52,7 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500).send({code:-1,msg :err.message || 'system.error'});
   res.render('error');
+  res.locals.aaaa="22222"
 });
 
 module.exports = app;

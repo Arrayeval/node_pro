@@ -4,7 +4,7 @@ const corsConfig = {
   "origin": loginAdress,
   "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
   "preflightContinue": false,
-  "optionsSuccessStatus": 204,
+  "optionsSuccessStatus": 200,
   "credentials": true
 }
 module.exports = corsConfig
