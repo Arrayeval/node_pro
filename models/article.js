@@ -4,9 +4,9 @@ var data = ''
 const Article = {
   // getArticleList
   getArticleList (data) {
-    var sql = `select * from article_list`
-    if (data.type !== undefined && data.type !== null) {
-      sql= sql + ` where type = ${data.type}`
+    var sql = 'select * from article_list'
+    if (data.type !== undefined && data.type !== null && data.type !== '') {
+      sql= sql + ' where type = '+ data.type
     }
     return dbOperate.queryData(sql,'').then(function(res){
       return Promise.resolve(res)
@@ -19,7 +19,7 @@ const Article = {
   addArticle (data) {
     var sql = `insert into article_list set ?`
     if (data.id != undefined ) { // 修改[拥有id说明是修改]
-      sql = `update article_list set title = ? , content= ?, type = ?, author = ?, createTime = ?, logo_info = ? where id = ${data.id}`
+      sql = `update article_list set title = ? , shortDes = ?, content= ?, type = ?, author = ?, createTime = ?, logo_info = ? where id = ${data.id}`
       delete data.id
       data = Object.values(data)
     }  
