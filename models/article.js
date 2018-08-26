@@ -6,7 +6,7 @@ const Article = {
   getArticleList (data) {
     var sql = 'select * from article_list'
     if (data.type !== undefined && data.type !== null && data.type !== '') {
-      sql= sql + ' where type = '+ data.type
+      sql= sql + ' where type = '+ `'${data.type}'`
     }
     return dbOperate.queryData(sql,'').then(function(res){
       return Promise.resolve(res)
