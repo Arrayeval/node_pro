@@ -16,7 +16,7 @@ router.route("/addArticle")
 // getArticlceList
 router.route('/getArticleList').get((req,res)=>{
  // var params = url.parse(req.url,true).query
-  Article.getArticleList({type: req.query.type}).then(result => {
+  Article.getArticleList({type: req.query.type, pageNum: req.query.pageStart}).then(result => {
     return res.json({code: 0, msg: '',data:result})
   }).catch(err=>{
     return res.json(err)

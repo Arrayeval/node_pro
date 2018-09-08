@@ -1,5 +1,5 @@
 // https://github.com/expressjs/cors#readme 
-const loginAdress = ['http://localhost:3000']
+const loginAdress = ['http://localhost:3000','http://192.168.1.103:3000']
 const corsConfig = {
   "origin": loginAdress,
   "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",

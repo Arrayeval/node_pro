@@ -1,10 +1,11 @@
 var dbOperate = require('../config/connect')
 var con = ''
 var data = ''
+const pageCount = 15
 const Article = {
   // getArticleList
   getArticleList (data) {
-    var sql = 'select * from article_list'
+    var sql = `select * from article_list  limit ${data.pageNum * pageCount}, ${pageCount}`
     if (data.type !== undefined && data.type !== null && data.type !== '') {
       sql= sql + ' where type = '+ `'${data.type}'`
     }
