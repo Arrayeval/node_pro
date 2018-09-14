@@ -1,10 +1,12 @@
 var config = {
   localConnect: {
-    host: '127.0.0.1',
+    host: 'localhost',
     port: '3306',
     user: 'uroot',
     password: '123456',
-    database: 'stu_el'
-  },
+    database: 'stu_el',
+    acquireTimeout: 15000, // 连接超时时间
+    connectionLimit: 200, // 最大连接数
+  }
 };
 module.exports = config

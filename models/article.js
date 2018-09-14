@@ -5,9 +5,12 @@ const pageCount = 15
 const Article = {
   // getArticleList
   getArticleList (data) {
+    if (data.pageNum === undefined) {
+      data.pageNum = 0
+    }
     var sql = `select * from article_list  limit ${data.pageNum * pageCount}, ${pageCount}`
     if (data.type !== undefined && data.type !== null && data.type !== '') {
-      sql= sql + ' where type = '+ `'${data.type}'`
+      sql=  `select * from article_list where type = '${data.type}' limit ${data.pageNum * pageCount}, ${pageCount}`
     }
     return dbOperate.queryData(sql,'').then(function(res){
       return Promise.resolve(res)

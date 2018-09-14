@@ -16,11 +16,27 @@ router.route("/addArticle")
 // getArticlceList
 router.route('/getArticleList').get((req,res)=>{
  // var params = url.parse(req.url,true).query
-  Article.getArticleList({type: req.query.type, pageNum: req.query.pageStart}).then(result => {
+ Article.getArticleList({type: req.query.type, pageNum: req.query.pageStart}).then(result => {
     return res.json({code: 0, msg: '',data:result})
   }).catch(err=>{
     return res.json(err)
   });
+
+  /*
+  let start_time = new Date().getTime()
+  let pAll = []
+  let count = 25000
+  let getData =  Article.getArticleList({type: req.query.type, pageNum: req.query.pageStart});
+  for (let i = 0; i < count; i++) {
+    pAll.push(getData);
+  }
+  Promise.all(pAll).then(result => {
+    let end_time = new Date().getTime();
+    console.log(`response time: ${end_time - start_time}`);
+    res.json({ code: 0, data: result });
+  });
+  */
+  
 })
 
 // deleteArticle
