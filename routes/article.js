@@ -47,4 +47,13 @@ router.route('/deleteArticle').get((req,res) => {
     return res.json(err)
   })
 })
+
+// 获得文章详情
+router.route('/getArticleItem').get((req, res) => {
+  Article.getArticleItem({id:req.query.id}).then(result => {
+    return res.json({code: 0, msg: '', result})
+  }).catch(err => {
+    return res.json(err)
+  })
+}) 
 module.exports =  router;
