@@ -23,7 +23,7 @@ const Article = {
   getSpecialArticleList (data) {
     let {keyWord} = {...data}
     var sql = `select * from article_list`
-    if (keyWord === undefined) { // 没进行关键字搜索(返回最近两天文章)
+    if (keyWord === undefined || keyWord === '') { // 没进行关键字搜索(返回最近两天文章)
       let searchTime = new Date().getTime() / 1000 - 2 * 24 * 60 * 60 
       sql += ` where UNIX_TIMESTAMP(createTime) > ${searchTime} `
     } else { // 进行关键字搜索
