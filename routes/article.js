@@ -36,7 +36,15 @@ router.route('/getArticleList').get((req,res)=>{
     res.json({ code: 0, data: result });
   });
   */
-  
+})
+
+// getSpecialArticleList
+router.route('/getSpecialArticleList').get((req, res) => {
+  Article.getSpecialArticleList({searchTime: req.query.searchTime , keyWord: req.query.keyWord}).then(result => {
+    return res.json({code: 0, msg: '', data: result})
+  }).catch(err => {
+    console.log(err)
+  })
 })
 
 // deleteArticle

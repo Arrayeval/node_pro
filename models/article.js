@@ -19,6 +19,23 @@ const Article = {
     })
   },
 
+  // 获取文章列表(时间[最近两天]，关键字)
+  getSpecialArticleList (data) {
+    let {keyWord} = {...data}
+    var sql = `select * from article_list`
+    if (keyWord === undefined) { // 没进行关键字搜索(返回最近两天文章)
+      let searchTime = new Date().getTime() / 1000 - 2 * 24 * 60 * 60 
+      sql += ` where UNIX_TIMESTAMP(createTime) > ${searchTime} `
+    } else { // 进行关键字搜索
+      sql += ` where title like '%${data.keyWord}%' or author like '%${data.keyWord}%' or type like '%${data.keyWord}%'`
+    }
+    return dbOperate.queryData(sql,'').then(function(res){
+      return Promise.resolve(res)
+    }).catch(err => {
+      return Promise.reject(err)
+    })
+  },
+
   //  addArticle/updateArticle by id 
   addArticle (data) {
     var sql = `insert into article_list set ?`
