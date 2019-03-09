@@ -1,3 +1,4 @@
+// 参考链接：https://www.cnblogs.com/fps2tao/p/7875618.html
 var WebSocketServer = require('ws').Server;
 wss = new WebSocketServer({
     port: 8080
@@ -43,7 +44,6 @@ wss.on('connection', (ws) => {
                 let symbol = clientStocks[i];
                 stocksObj[symbol] = stocks[symbol]
             }
-
             if (stocksObj.length !== 0) {
                 ws.send(JSON.stringify(stocksObj)) // 需要将对象转成字符串，webSocket只支持文本和二进制数据
             }
