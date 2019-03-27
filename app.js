@@ -10,6 +10,7 @@ var indexRouter = require('./routes/index');
 var tabRouter = require('./routes/tabs') 
 var articleRouter = require('./routes/article') 
 var uploadRouter = require('./routes/upload_file') 
+var getOuterDataRouter = require('./routes/get_outer_data') 
 
 var app = express();
 
@@ -34,6 +35,7 @@ app.use('/', indexRouter);
 app.use('/tabs', tabRouter);
 app.use('/article', articleRouter);
 app.use('/upload', uploadRouter);
+app.use('/getouterdata', getOuterDataRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
