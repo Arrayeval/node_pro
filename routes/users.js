@@ -14,7 +14,7 @@ router.post('/login', (req, res, next) => {
     req.session.userInfo = {
       username: result.username
     }
-   return res.json({code: 0, msg: 'login success'})
+   return res.json({code: 0, msg: 'login success', username: result.username})
   }).catch(err => {
     return res.json({code: -1, msg: err})
   })

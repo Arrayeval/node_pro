@@ -33,12 +33,13 @@ app.use(express.static('public'));
 
 // 设置session
 app.use(session({
-  secret : new Date().getTime() + '',  //加密session
-  cookie : {maxAge : 60*1000*30}, // 设置过期时间
-  resave : false,  // 强制保存session 默认为 true，建议设置成false
+  rolling: true, // 在用户离开操作之后30min,会自动清除session
+  secret : "absddfd "+ '',  //加密session
+  cookie : {maxAge : 1000*60*30}, // 设置过期时间 30min
+  resave : true,  // 强制保存session 默认为 true，建议设置成false
   saveUninitialized : false // 强制将未初始化的session存储 默认为true，建议设置成true
 }));
- 
+
 // 路由配置
 app.use('/', indexRouter);
 app.use('/tabs', tabRouter);
@@ -47,6 +48,7 @@ app.use('/upload', uploadRouter);
 app.use('/getouterdata', getOuterDataRouter);
 app.use('/user', userRouter);
 // catch 404 and forward to error handler
+
 app.use(function(req, res, next) {
   next(createError(404));
 });
