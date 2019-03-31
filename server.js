@@ -45,7 +45,7 @@ wss.on('connection', (ws) => {
                 stocksObj[symbol] = stocks[symbol]
             }
             if (stocksObj.length !== 0) {
-                ws.send(JSON.stringify(stocksObj)) // 需要将对象转成字符串，webSocket只支持文本和二进制数据
+               ws.send(JSON.stringify(stocksObj)) // 需要将对象转成字符串，webSocket只支持文本和二进制数据
             }
         }
     }
@@ -55,9 +55,13 @@ wss.on('connection', (ws) => {
     }, 1000)
 
     ws.on('message', function (message) {
-        console.log(message);
+        console.log("message",message)
         let stockRequest = JSON.parse(message) // 接受请求发送来的数据
         clientStocks = stockRequest['stocks']
         sendStockUpdates(ws)
+    })
+
+    ws.on("close", () => {
+        console.log('disconnect')
     })
 })
