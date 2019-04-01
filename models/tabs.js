@@ -1,7 +1,5 @@
 var dbOperate = require('../config/connect')
 var envConfig = require('../config/envConfig')
-var con = ''
-var data = ''
 const Tabs = {
   // 获得tabsList
   getTabs () {
@@ -10,7 +8,7 @@ const Tabs = {
       res.forEach((item , key) => {
         if (item.file_data !== '') {
           item.file_data = JSON.parse(item.file_data)
-          item.file_data.url = envConfig.address + '/images/' + item.file_data['name']
+          item.file_data.url = envConfig.address() + '/images/' + item.file_data['name']
         }
       });
       return Promise.resolve(res)
@@ -50,7 +48,7 @@ const Tabs = {
         res.forEach((item , key) => {
           if (item.file_data !== '') {
             item.file_data = JSON.parse(item.file_data)
-            item.file_data.url = envConfig.address +'/images/' + item.file_data['name']
+            item.file_data.url = envConfig.address() +'/images/' + item.file_data['name']
           }
         });
         return Promise.resolve(res);
