@@ -1,7 +1,7 @@
 var createError = require('http-errors');
 var express = require('express');
 
-var path = require('path');
+// var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var envConfig = require('./config/envConfig')
@@ -16,8 +16,8 @@ SetCors(app)
 
 // app.locals.dataDocuemnt = 'www'
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+// app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -49,7 +49,6 @@ app.use(function(err, req, res, next) {
   res.locals.error = req.app.get('env') === 'development' ? err : {};
   // render the error page
   res.status(err.status || 500).send({code:-1,msg :err.message || 'system.error'});
-  res.render('error');
   res.locals.aaaa="22222"
 });
 
