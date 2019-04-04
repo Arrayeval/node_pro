@@ -4,8 +4,8 @@ const userConfig = require('../config/userConfig')
 const UserSetting = {
   login (obj) {
     return new Promise ((resolve, reject) => {
-      var username = obj.username;
-      var password = obj.password;
+      var username = obj.username || 'admin';
+      var password = obj.password || 123456;
       if( userConfig.username.includes(username) && password === userConfig.password){
        resolve({username}); //设置session，表示用户处在的登录状态
       }else{

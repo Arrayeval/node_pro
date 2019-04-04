@@ -7,4 +7,10 @@ const corsConfig = {
   "optionsSuccessStatus": 200,
   "credentials": true
 }
-module.exports = corsConfig
+
+function SetCors (app) {
+  var cors  = require('cors')
+  app.options('*',cors(corsConfig))
+  app.all('*', cors(corsConfig));
+}
+module.exports = SetCors

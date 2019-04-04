@@ -1,25 +1,19 @@
 var createError = require('http-errors');
 var express = require('express');
-var session = require('express-session')
+
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var envConfig = require('./config/envConfig')
 // 引入路由文件
-var indexRouter = require('./routes/index');
-var tabRouter = require('./routes/tabs') 
-var userRouter = require('./routes/users') 
-var articleRouter = require('./routes/article') 
-var uploadRouter = require('./routes/upload_file') 
-var getOuterDataRouter = require('./routes/get_outer_data') 
-
+var SetRouter = require('./routes')
+var SetCors = require('./config/corsConfig')
+var SetSession = require('./config/sessionConfig')
 var app = express();
 
 // cors设置[跨域问题] https://github.com/expressjs/cors#readme
-var cors  = require('cors')
-var corsConfig = require('./config/corsConfig')
-app.options('*',cors(corsConfig))
-app.all('*', cors(corsConfig));
+SetCors(app)
+
 // app.locals.dataDocuemnt = 'www'
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -29,30 +23,19 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+// 静态资源文件
 app.use(express.static('public'));
 
 // 设置session
-app.use(session({
-  rolling: true, // 在用户离开操作之后30min,会自动清除session
-  secret : "absddfd "+ '',  //加密session
-  cookie : {maxAge : 1000*60*30}, // 设置过期时间 30min
-  resave : true,  // 强制保存session 默认为 true，建议设置成false
-  saveUninitialized : false // 强制将未初始化的session存储 默认为true，建议设置成true
-}));
+SetSession(app)
 
 // 路由配置
-app.use('/', indexRouter);
-app.use('/tabs', tabRouter);
-app.use('/article', articleRouter);
-app.use('/upload', uploadRouter);
-app.use('/getouterdata', getOuterDataRouter);
-app.use('/user', userRouter);
-// catch 404 and forward to error handler
+SetRouter(app)
 
 app.use(function(req, res, next) {
   next(createError(404));
 });
-
 
 app.set("port",envConfig.port)
 app.listen(app.get("port"), function() {
